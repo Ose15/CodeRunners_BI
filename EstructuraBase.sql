@@ -1,4 +1,5 @@
 CREATE DATABASE code_runners;
+USE code_runners;
 CREATE TABLE dim_hora(
     id_hora INT PRIMARY KEY IDENTITY,
     hora INT NOT NULL,
@@ -75,7 +76,7 @@ CREATE TABLE fact_ventas(
     num_orden INT NOT NULL,
     corr_detalle INT NOT NULL,
     cantidad DECIMAL(12, 3),
-    monto DECIMAL (10, 2)
+    monto DECIMAL (10, 2),
     monto_descuento DECIMAL(10, 2),
     monto_impuesto DECIMAL(10, 2),
     monto_envio DECIMAL(10, 2),
