@@ -1,0 +1,66 @@
+table dim_fecha
+	lineageTag: 2a13897c-adc6-4f8a-96dd-e83ff58ef769
+
+	column id_fecha
+		dataType: int64
+		formatString: 0
+		lineageTag: 62aefacb-0204-46df-8d55-b4c5994462ad
+		summarizeBy: none
+		sourceColumn: id_fecha
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6402194a-f841-4ea5-b8a2-d3a5b11b64aa
+		summarizeBy: none
+		sourceColumn: fecha
+
+		variation Variación
+			isDefault
+			relationship: 3745e4f6-0172-4ff6-a487-379c54d605f6
+			defaultHierarchy: LocalDateTable_fa2ad41d-93ca-4ccd-9734-6b589665c1de.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column anio
+		dataType: int64
+		formatString: 0
+		lineageTag: d4027b31-62d8-4c4d-9cf0-63dd91c6ab88
+		summarizeBy: sum
+		sourceColumn: anio
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes
+		dataType: int64
+		formatString: 0
+		lineageTag: eb7bd765-a69c-49f6-b17d-ab868e746e86
+		summarizeBy: sum
+		sourceColumn: mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column dia
+		dataType: int64
+		formatString: 0
+		lineageTag: 1037c524-cbeb-4241-b68c-4e82c53e2bf8
+		summarizeBy: sum
+		sourceColumn: dia
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_fecha = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost", "code_runners"),
+				    dbo_dim_fecha = Origen{[Schema="dbo",Item="dim_fecha"]}[Data]
+				in
+				    dbo_dim_fecha
+
+	annotation PBI_ResultType = Table
+

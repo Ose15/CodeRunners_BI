@@ -1,0 +1,35 @@
+relationship 3745e4f6-0172-4ff6-a487-379c54d605f6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_fecha.fecha
+	toColumn: LocalDateTable_fa2ad41d-93ca-4ccd-9734-6b589665c1de.Date
+
+relationship 52705c4d-c2e5-4a0e-88bb-fceb7a196495
+	fromColumn: fact_ventas.id_fecha
+	toColumn: dim_fecha.id_fecha
+
+	annotation PBI_IsFromSource = FS
+
+relationship d62f2924-5e8f-433d-8b4d-5ef22b8aca41
+	fromColumn: fact_ventas.codigo_producto
+	toColumn: dim_producto.codigo_producto
+
+	annotation PBI_IsFromSource = FS
+
+relationship e3b34f5e-b032-47c4-ac4b-830811e3081e
+	fromColumn: fact_movimientos_inventario.id_fecha
+	toColumn: dim_fecha.id_fecha
+
+	annotation PBI_IsFromSource = FS
+
+relationship 33fc8a87-9c9f-44ae-a654-d45b603a1688
+	fromColumn: fact_movimientos_inventario.id_almacen
+	toColumn: dim_almacen.id_almacen
+
+	annotation PBI_IsFromSource = FS
+
+relationship aaa46620-b316-4162-9ed3-52be722b51a2
+	fromColumn: fact_movimientos_inventario.codigo_producto
+	toColumn: dim_producto.codigo_producto
+
+	annotation PBI_IsFromSource = FS
+

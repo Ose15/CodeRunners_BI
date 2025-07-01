@@ -1,0 +1,110 @@
+table dim_producto
+	lineageTag: 20150060-b2a7-404b-b3d9-99ca123d6450
+
+	measure StockProductos =
+			
+			SUM(fact_movimientos_inventario[stock_resultante])
+		lineageTag: 771b2bd4-4b58-47d4-868f-836ee00b8d5f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure UltimaVentaPorProducto =
+			
+			CALCULATE(
+			    MAX(dim_fecha[fecha]),
+			    RELATEDTABLE(fact_ventas)
+			)
+		formatString: General Date
+		lineageTag: a0ad4ac9-a26c-4a8f-a052-8761352df00d
+
+	measure DiasDesdeUltimaVenta =
+			
+			DATEDIFF([UltimaVentaPorProducto], TODAY(), DAY)
+		formatString: 0
+		lineageTag: c307d39a-390e-4022-9fc3-cc66a7e57c23
+
+	column codigo_producto
+		dataType: string
+		lineageTag: ae93d0b2-55f3-4c41-a29b-3b874d155125
+		summarizeBy: none
+		sourceColumn: codigo_producto
+
+		annotation SummarizationSetBy = Automatic
+
+	column descripcion
+		dataType: string
+		lineageTag: 17b4029e-1f64-4945-b26e-d754930b819f
+		summarizeBy: none
+		sourceColumn: descripcion
+
+		annotation SummarizationSetBy = Automatic
+
+	column marca
+		dataType: string
+		lineageTag: 56e75f81-7374-44ec-a1d6-cfa366a42846
+		summarizeBy: none
+		sourceColumn: marca
+
+		annotation SummarizationSetBy = Automatic
+
+	column categoria
+		dataType: string
+		lineageTag: cfbf0e18-2cbb-4c66-a95e-db904b14451c
+		summarizeBy: none
+		sourceColumn: categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column subcategoria
+		dataType: string
+		lineageTag: 4a5aade4-972a-48bf-98f2-38e2e0753013
+		summarizeBy: none
+		sourceColumn: subcategoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column unidad
+		dataType: string
+		lineageTag: aedc0bcc-89c2-4bd8-850a-14a6961f54a3
+		summarizeBy: none
+		sourceColumn: unidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column peso_lb
+		dataType: double
+		lineageTag: 98c76083-09a1-4dec-a180-9bac0c1bc0d7
+		summarizeBy: sum
+		sourceColumn: peso_lb
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column color
+		dataType: string
+		lineageTag: 4dce574e-b69b-4159-bbfa-5755e2dd7323
+		summarizeBy: none
+		sourceColumn: color
+
+		annotation SummarizationSetBy = Automatic
+
+	column tamanio
+		dataType: string
+		lineageTag: ac22147a-dc45-4bf5-ae5a-deadc22fc46d
+		summarizeBy: none
+		sourceColumn: tamanio
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_producto = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost", "code_runners"),
+				    dbo_dim_producto = Origen{[Schema="dbo",Item="dim_producto"]}[Data]
+				in
+				    dbo_dim_producto
+
+	annotation PBI_ResultType = Table
+

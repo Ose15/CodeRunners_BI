@@ -1,0 +1,26 @@
+model Model
+	culture: es-ES
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-SV
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["dim_fecha","dim_almacen","dim_producto","fact_ventas","fact_movimientos_inventario"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.144.1155.0 (25.06)+46435b07013d2a234d7fd007083a9e70b8e79f1c
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table dim_fecha
+ref table DateTableTemplate_6be7953b-adac-48bf-a635-1801126b4988
+ref table LocalDateTable_fa2ad41d-93ca-4ccd-9734-6b589665c1de
+ref table dim_almacen
+ref table dim_producto
+ref table fact_ventas
+ref table fact_movimientos_inventario
+
+ref cultureInfo es-ES
+
