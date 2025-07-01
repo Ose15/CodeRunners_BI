@@ -1,0 +1,126 @@
+table dim_almacen
+	lineageTag: 6efc421c-f086-4496-bb3d-5554ae8c8c61
+
+	measure 'Nuevos Clientes' =
+			
+			VAR MaxDateInData = MAX(dim_fecha[fecha]) // Obtiene la fecha más reciente en tus datos
+			VAR SixMonthsAgo = EDATE(MaxDateInData, -6) // Calcula la fecha de hace 6 meses desde MaxDateInData
+			
+			RETURN
+			    CALCULATE (
+			        DISTINCTCOUNT ( dim_cliente[id_cliente] ),
+			        FILTER (
+			            ALL ( dim_cliente ), // Itera sobre todos los clientes
+			            VAR FirstPurchaseIdFecha = // Obtiene el id_fecha de la primera compra
+			                CALCULATE (
+			                    MIN ( fact_ventas[id_fecha] ),
+			                    ALLEXCEPT ( dim_cliente, dim_cliente[id_cliente] )
+			                )
+			            VAR FirstPurchaseDateForClient = // Obtiene la fecha real de la primera compra
+			                LOOKUPVALUE( dim_fecha[fecha], dim_fecha[id_fecha], FirstPurchaseIdFecha )
+			            RETURN
+			                FirstPurchaseDateForClient >= SixMonthsAgo
+			                && FirstPurchaseDateForClient <= MaxDateInData
+			        )
+			    )
+		formatString: 0
+		lineageTag: 1839dfd4-c6c1-4156-8ed9-0bc66c70a730
+
+	measure 'Clientes Inactivos' =
+			
+			VAR MaxDateInData = MAX(dim_fecha[fecha]) // Obtiene la fecha más reciente en tus datos
+			VAR MonthsInactiveThreshold = 1 // <--- CAMBIA ESTE VALOR (ej. 1, 2, 3) PARA PROBAR
+			VAR InactiveThresholdDate = EDATE(MaxDateInData, -MonthsInactiveThreshold) // Calcula la fecha límite para la inactividad
+			
+			RETURN
+			    CALCULATE (
+			        DISTINCTCOUNT ( dim_cliente[id_cliente] ),
+			        FILTER (
+			            ALL ( dim_cliente ), // Itera sobre todos los clientes
+			            VAR LastPurchaseIdFecha = // Obtiene el id_fecha de la última compra
+			                CALCULATE (
+			                    MAX ( fact_ventas[id_fecha] ),
+			                    ALLEXCEPT ( dim_cliente, dim_cliente[id_cliente] )
+			                )
+			            VAR LastPurchaseDateForClient = // Obtiene la fecha real de la última compra
+			                LOOKUPVALUE( dim_fecha[fecha], dim_fecha[id_fecha], LastPurchaseIdFecha )
+			            RETURN
+			                -- Un cliente es inactivo si tuvo compras Y su última compra fue ANTES del umbral
+			                NOT ISBLANK(LastPurchaseDateForClient) && LastPurchaseDateForClient < InactiveThresholdDate
+			        )
+			    )
+		formatString: 0
+		lineageTag: 405d032d-92c6-4091-9edd-db526257ebea
+
+	measure 'Total Ingresos' = SUM(fact_ventas[monto])
+		lineageTag: 182ac959-bbbc-4944-984c-694cc12c2406
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Clientes Unicos' = DISTINCTCOUNT(dim_cliente[id_cliente])
+		formatString: 0
+		lineageTag: a7589c5f-d957-485d-ac51-a91dd7ee0208
+
+	measure 'Valor promedio por cliente' =
+			
+			DIVIDE( [Total Ingresos], [Total Clientes Unicos], 0 )
+		lineageTag: 81a3046b-41b0-4e8f-9ff4-ae04436b3fdc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Clientes con Compras' = CALCULATE(DISTINCTCOUNT(dim_cliente[id_cliente]), NOT ISBLANK(fact_ventas[id_cliente]))
+		formatString: 0
+		lineageTag: e9400907-8b19-4644-a483-d11a63527636
+
+	column id_almacen
+		dataType: int64
+		formatString: 0
+		lineageTag: c6f16df2-e299-4ece-8eeb-6b7afb623ec7
+		summarizeBy: none
+		sourceColumn: id_almacen
+
+		annotation SummarizationSetBy = Automatic
+
+	column nombre
+		dataType: string
+		lineageTag: c12680db-c986-4d93-9c2a-3cff5e6d95c9
+		summarizeBy: none
+		sourceColumn: nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column sucursal
+		dataType: string
+		lineageTag: 44c6e458-2ef6-4b4e-9a52-08101214087f
+		summarizeBy: none
+		sourceColumn: sucursal
+
+		annotation SummarizationSetBy = Automatic
+
+	column departamento
+		dataType: string
+		lineageTag: d20db935-eb24-4381-8589-0bbc2b29caad
+		summarizeBy: none
+		sourceColumn: departamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column municipio
+		dataType: string
+		lineageTag: 939d47a9-5910-42bd-81bc-80a3a1b8d712
+		summarizeBy: none
+		sourceColumn: municipio
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_almacen = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("127.0.0.1", "code_runners"),
+				    dbo_dim_almacen = Source{[Schema="dbo",Item="dim_almacen"]}[Data]
+				in
+				    dbo_dim_almacen
+
+	annotation PBI_ResultType = Table
+

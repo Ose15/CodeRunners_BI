@@ -1,0 +1,86 @@
+table fact_movimientos_inventario
+	lineageTag: 301632f3-0574-4fae-b2c1-3e9f7d653c5f
+
+	column id_movimiento
+		dataType: int64
+		formatString: 0
+		lineageTag: cbd31324-1ac6-4dd8-baf1-deb894f8a476
+		summarizeBy: sum
+		sourceColumn: id_movimiento
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo_movimiento
+		dataType: string
+		lineageTag: 9c6373b5-7dbe-446a-931f-10b8836d6c3a
+		summarizeBy: none
+		sourceColumn: tipo_movimiento
+
+		annotation SummarizationSetBy = Automatic
+
+	column cantidad
+		dataType: double
+		lineageTag: 7f71ac98-1c79-4a52-af19-8842552741df
+		summarizeBy: sum
+		sourceColumn: cantidad
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column stock_resultante
+		dataType: double
+		lineageTag: c20cd102-e29b-4634-9491-13b206c23496
+		summarizeBy: sum
+		sourceColumn: stock_resultante
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column id_fecha
+		dataType: int64
+		formatString: 0
+		lineageTag: ceab8e3c-ebd5-417b-9e54-81d008878261
+		summarizeBy: none
+		sourceColumn: id_fecha
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_hora
+		dataType: int64
+		formatString: 0
+		lineageTag: 8f07358b-1b68-45c1-8dcc-5abd97240d78
+		summarizeBy: none
+		sourceColumn: id_hora
+
+		annotation SummarizationSetBy = Automatic
+
+	column codigo_producto
+		dataType: string
+		lineageTag: 6ec54dd5-8016-4d5e-b882-78e1edc89525
+		summarizeBy: none
+		sourceColumn: codigo_producto
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_almacen
+		dataType: int64
+		formatString: 0
+		lineageTag: 42a97297-743f-4456-a758-2657ca288672
+		summarizeBy: none
+		sourceColumn: id_almacen
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_movimientos_inventario = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("127.0.0.1", "code_runners"),
+				    dbo_fact_movimientos_inventario = Source{[Schema="dbo",Item="fact_movimientos_inventario"]}[Data]
+				in
+				    dbo_fact_movimientos_inventario
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,82 @@
+table dim_fecha
+	lineageTag: 352fe6d2-842f-4934-85ff-2e15f0bc31da
+
+	column id_fecha
+		dataType: int64
+		formatString: 0
+		lineageTag: e9b3c3d1-f893-4ad6-9d2c-f930023faf83
+		summarizeBy: none
+		sourceColumn: id_fecha
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c2b6c422-18ee-4460-a143-6c0745a2741a
+		summarizeBy: none
+		sourceColumn: fecha
+
+		variation Variation
+			isDefault
+			relationship: ff41a711-e3f8-413c-99f7-2fc9c2f21a71
+			defaultHierarchy: LocalDateTable_c6b19e86-0ee0-4d39-a66e-9fc96bb4ef3e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column anio
+		dataType: int64
+		formatString: 0
+		lineageTag: ab4be9c3-994a-4de3-9c25-2b30c91b213f
+		summarizeBy: sum
+		sourceColumn: anio
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes
+		dataType: int64
+		formatString: 0
+		lineageTag: 7543cf6f-524f-4688-81c5-773d4776b971
+		summarizeBy: sum
+		sourceColumn: mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column dia
+		dataType: int64
+		formatString: 0
+		lineageTag: 4484de19-c5df-4288-b6d5-9ddd38b820f8
+		summarizeBy: sum
+		sourceColumn: dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column Año_Mes_Nombre = FORMAT(dim_fecha[fecha], "MMMYYYY")
+		lineageTag: be52e266-567c-4104-841a-700bd0fcc4b6
+		summarizeBy: none
+		sortByColumn: Año_Mes_Clave
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Año_Mes_Clave = ( dim_fecha[anio] * 100 ) + dim_fecha[mes]
+		formatString: 0
+		lineageTag: e1115e77-99c5-4882-9cca-2ee004aa9cd0
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_fecha = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("127.0.0.1", "code_runners"),
+				    dbo_dim_fecha = Source{[Schema="dbo",Item="dim_fecha"]}[Data]
+				in
+				    dbo_dim_fecha
+
+	annotation PBI_ResultType = Table
+

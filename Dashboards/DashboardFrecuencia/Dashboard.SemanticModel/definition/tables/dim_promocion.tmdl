@@ -1,0 +1,81 @@
+table dim_promocion
+	lineageTag: 05bb690f-3068-4d05-8ad8-464b11cc9e1a
+
+	column id_promocion
+		dataType: int64
+		formatString: 0
+		lineageTag: e37be279-a054-4635-975d-bc21bfdb6d6c
+		summarizeBy: none
+		sourceColumn: id_promocion
+
+		annotation SummarizationSetBy = Automatic
+
+	column nommbre
+		dataType: string
+		lineageTag: f3bc0a97-e949-412e-91d0-b7d017d9bcdb
+		summarizeBy: none
+		sourceColumn: nommbre
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo
+		dataType: string
+		lineageTag: 3d861613-1765-4d5d-a8fa-f4944ea1450d
+		summarizeBy: none
+		sourceColumn: tipo
+
+		annotation SummarizationSetBy = Automatic
+
+	column presupuesto
+		dataType: double
+		lineageTag: dfd58396-bf83-4306-87a3-389160c9dcea
+		summarizeBy: sum
+		sourceColumn: presupuesto
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fecha_inicio
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 386db69b-38e8-4f61-92dc-6584e53bc395
+		summarizeBy: none
+		sourceColumn: fecha_inicio
+
+		variation Variation
+			isDefault
+			relationship: 40e09f82-3734-4404-a8af-d5a262fe0f5c
+			defaultHierarchy: LocalDateTable_4eef6a57-970b-46ae-96b2-641eb4e269d0.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column fecha_fin
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 53593e25-9cdf-4939-8837-2469a4128dac
+		summarizeBy: none
+		sourceColumn: fecha_fin
+
+		variation Variation
+			isDefault
+			relationship: a4c436d0-0cc5-48d3-80c6-cdff03766acd
+			defaultHierarchy: LocalDateTable_5e527886-5b36-41c2-ab7d-b184e307c67d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition dim_promocion = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("127.0.0.1", "code_runners"),
+				    dbo_dim_promocion = Source{[Schema="dbo",Item="dim_promocion"]}[Data]
+				in
+				    dbo_dim_promocion
+
+	annotation PBI_ResultType = Table
+

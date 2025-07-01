@@ -1,0 +1,63 @@
+table dim_pago
+	lineageTag: 5e41986a-6408-488e-8bc8-1fd0b1fc7049
+
+	column id_pago
+		dataType: int64
+		formatString: 0
+		lineageTag: 4e769291-8247-4eeb-8166-560aa727e1b5
+		summarizeBy: none
+		sourceColumn: id_pago
+
+		annotation SummarizationSetBy = Automatic
+
+	column metodo
+		dataType: string
+		lineageTag: 64c963ac-9aa5-4c53-b849-cb55eee031be
+		summarizeBy: none
+		sourceColumn: metodo
+
+		annotation SummarizationSetBy = Automatic
+
+	column banco_dest
+		dataType: string
+		lineageTag: c84d00c3-c6bb-45c6-8892-82713b402f77
+		summarizeBy: none
+		sourceColumn: banco_dest
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_cuenta
+		dataType: string
+		lineageTag: 0819c529-cce0-4604-8d90-636ac8a4910e
+		summarizeBy: none
+		sourceColumn: num_cuenta
+
+		annotation SummarizationSetBy = Automatic
+
+	column concepto
+		dataType: string
+		lineageTag: 32b5a7ad-bd54-41ac-bd0a-c8613b39cbc6
+		summarizeBy: none
+		sourceColumn: concepto
+
+		annotation SummarizationSetBy = Automatic
+
+	column titular
+		dataType: string
+		lineageTag: 417b683e-b011-4fc6-ad39-66f76c9eeda2
+		summarizeBy: none
+		sourceColumn: titular
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_pago = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("127.0.0.1", "code_runners"),
+				    dbo_dim_pago = Source{[Schema="dbo",Item="dim_pago"]}[Data]
+				in
+				    dbo_dim_pago
+
+	annotation PBI_ResultType = Table
+

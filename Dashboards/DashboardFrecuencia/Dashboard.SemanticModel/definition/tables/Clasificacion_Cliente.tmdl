@@ -1,0 +1,91 @@
+table Clasificacion_Cliente
+	lineageTag: fce31452-f438-409e-918c-4bd10b4bc0f9
+
+	measure Conteo_Segmento_Cliente =
+			
+			VAR __SelectedSegment = SELECTEDVALUE(Clasificacion_Cliente[Segmento])
+			VAR __TotalClientesUnicos = DISTINCTCOUNT(dim_cliente[id_cliente])
+			VAR __NuevosClientes = [Nuevos Clientes] // Referencia a tu medida existente
+			VAR __ClientesInactivos = [Clientes Inactivos] // Referencia a tu medida existente
+			VAR __ClientesFrecuentes = __TotalClientesUnicos - __NuevosClientes - __ClientesInactivos
+			
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        __SelectedSegment = "Nuevos clientes", __NuevosClientes,
+			        __SelectedSegment = "Clientes Inactivos", __ClientesInactivos,
+			        __SelectedSegment = "Clientes Frecuentes", __ClientesFrecuentes,
+			        BLANK() // Devuelve en blanco si no hay segmento seleccionado
+			    )
+		formatString: 0
+		lineageTag: c4928b12-0137-4504-ad9d-004b2e24ae82
+
+	measure Clientes_Por_Cuarto =
+			
+			DISTINCTCOUNT(fact_ventas[id_cliente])
+		formatString: 0
+		lineageTag: 3baf677e-85fd-4614-b3c0-65f944a2c373
+
+	measure 'Total Monto Ventas' = ```
+			SUM(fact_ventas[monto])
+			
+			```
+		lineageTag: 133c5392-b842-412f-93df-2ae5249bbbb8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Cantidad Vendida' = SUM(fact_ventas[cantidad])
+		lineageTag: 5de1918f-38e9-4775-a9d6-3a76182a8ade
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Conteo_Clasificacion_Cliente =
+			
+			VAR __SelectedSegment = SELECTEDVALUE(Clasificacion_Cliente[Segmento])
+			VAR __TotalClientes = [Total Clientes] // Referencia a la medida Total Clientes
+			VAR __TotalClientesConCompras = [Total Clientes con Compras] // Referencia a la medida Total Clientes con Compras
+			VAR __NuevosClientes = [Nuevos Clientes] // Referencia a tu medida existente
+			VAR __ClientesInactivos = [Clientes Inactivos] // Referencia a tu medida existente
+			VAR __ClientesSinCompras = __TotalClientes - __TotalClientesConCompras
+			VAR __ClientesFrecuentes = __TotalClientesConCompras - __NuevosClientes - __ClientesInactivos
+			
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        __SelectedSegment = "Activos", __TotalClientesConCompras - __ClientesInactivos - __NuevosClientes + __NuevosClientes, -- Esto es igual a __TotalClientesConCompras - __ClientesInactivos. Es decir, Clientes Activos (no inactivos)
+			        __SelectedSegment = "Inactivos", __ClientesInactivos,
+			        __SelectedSegment = "Frecuentes", __ClientesFrecuentes, -- Clientes con compras que no son nuevos ni inactivos
+			        __SelectedSegment = "Sin Compras", __ClientesSinCompras,
+			        BLANK()
+			    )
+		lineageTag: 8a57b7d6-155f-43cd-9fbe-ac7503a2ef9d
+
+	measure 'Total Clientes' = DISTINCTCOUNT(dim_cliente[id_cliente])
+		formatString: 0
+		lineageTag: 0419cb16-45e6-4ece-918c-3e4a9bbd63f0
+
+	column Segmento
+		lineageTag: 94ef2a3c-b681-4d9c-bc4d-033ac89ce2c9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Segmento]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Clasificacion_Cliente = calculated
+		mode: import
+		source = ```
+				DATATABLE(
+				    "Segmento", STRING,
+				    {
+				        {"Activos"},
+				        {"Inactivos"},
+				        {"Frecuentes"},
+				        {"Sin Compras"}
+				    }
+				)
+				
+				```
+
+	annotation PBI_Id = b85ed391c3f7495095f7245945381f47
+

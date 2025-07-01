@@ -1,0 +1,34 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["dim_almacen","dim_cliente","dim_fecha","dim_hora","dim_pago","dim_producto","dim_promocion","dim_ubicacion","fact_movimientos_inventario","fact_ventas"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.144.1155.0 (25.06)+46435b07013d2a234d7fd007083a9e70b8e79f1c
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table dim_almacen
+ref table dim_cliente
+ref table dim_fecha
+ref table DateTableTemplate_b46c5ba2-2122-45fc-a93f-26fb3d3f11c3
+ref table LocalDateTable_c6b19e86-0ee0-4d39-a66e-9fc96bb4ef3e
+ref table dim_hora
+ref table dim_pago
+ref table dim_producto
+ref table dim_promocion
+ref table LocalDateTable_4eef6a57-970b-46ae-96b2-641eb4e269d0
+ref table LocalDateTable_5e527886-5b36-41c2-ab7d-b184e307c67d
+ref table dim_ubicacion
+ref table fact_movimientos_inventario
+ref table fact_ventas
+ref table Clasificacion_Cliente
+
+ref cultureInfo en-US
+
