@@ -1,0 +1,50 @@
+table fact_carrito_detalle
+	lineageTag: f404dc78-3eb8-4f63-b8ce-eb53184e103d
+
+	column id_detalle
+		dataType: int64
+		formatString: 0
+		lineageTag: 52fa95ee-b5c2-4bee-b5d3-bc5408fd792f
+		summarizeBy: sum
+		sourceColumn: id_detalle
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_carrito
+		dataType: int64
+		formatString: 0
+		lineageTag: 1f6325ab-1323-43e7-993b-1a3bb1485ce7
+		summarizeBy: none
+		sourceColumn: id_carrito
+
+		annotation SummarizationSetBy = Automatic
+
+	column codigo_producto
+		dataType: string
+		lineageTag: 38294182-9a51-42cb-aff7-b64157f366ae
+		summarizeBy: none
+		sourceColumn: codigo_producto
+
+		annotation SummarizationSetBy = Automatic
+
+	column cantidad
+		dataType: double
+		lineageTag: 7dc0ec95-2c38-4e0c-bfc3-2ecc72e75193
+		summarizeBy: sum
+		sourceColumn: cantidad
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fact_carrito_detalle = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost", "ProyectoBi"),
+				    dbo_fact_carrito_detalle = Origen{[Schema="dbo",Item="fact_carrito_detalle"]}[Data]
+				in
+				    dbo_fact_carrito_detalle
+
+	annotation PBI_ResultType = Table
+

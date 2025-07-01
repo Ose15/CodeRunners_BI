@@ -1,0 +1,57 @@
+table fa
+	lineageTag: 21a9975e-d2a7-4e58-8abf-57706dd5c7c0
+
+	column id_almacen
+		dataType: int64
+		formatString: 0
+		lineageTag: effd082f-e16e-4145-9fd4-a5348b6566f4
+		summarizeBy: none
+		sourceColumn: id_almacen
+
+		annotation SummarizationSetBy = Automatic
+
+	column nombre
+		dataType: string
+		lineageTag: a838d802-372f-47fc-b8eb-bc1e0681648c
+		summarizeBy: none
+		sourceColumn: nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column sucursal
+		dataType: string
+		lineageTag: 2ea17e86-5954-4913-bd9f-3e9eb2da7bae
+		summarizeBy: none
+		sourceColumn: sucursal
+
+		annotation SummarizationSetBy = Automatic
+
+	column departamento
+		dataType: string
+		lineageTag: 90e520c7-8e4a-4ded-8e92-8135ace0fa80
+		summarizeBy: none
+		sourceColumn: departamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column municipio
+		dataType: string
+		lineageTag: d4cc0a63-3025-4e0e-9f3c-f198950ad665
+		summarizeBy: none
+		sourceColumn: municipio
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fa = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost", "ProyectoBi"),
+				    dbo_dim_almacen = Origen{[Schema="dbo",Item="dim_almacen"]}[Data]
+				in
+				    dbo_dim_almacen
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

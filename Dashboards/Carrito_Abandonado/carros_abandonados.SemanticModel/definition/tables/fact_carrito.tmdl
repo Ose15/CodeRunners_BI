@@ -1,0 +1,182 @@
+table fact_carrito
+	lineageTag: b8182b8a-ae76-41e4-ba80-ad0d70701b7d
+
+	measure 'Carritos Completados' = ```
+			
+			CALCULATE(
+			    COUNTROWS(fact_carrito),
+			    CONVERT(fact_carrito[fue_completado], INTEGER) = 1
+			)
+			
+			
+			```
+		formatString: 0
+		lineageTag: bfe13960-15ab-46c4-bf82-f761cf442ca2
+
+	measure 'Carritos Abandonados' = ```
+			
+			CALCULATE(
+			    COUNTROWS(fact_carrito),
+			    CONVERT(fact_carrito[fue_completado], INTEGER) = 0
+			)
+			
+			
+			```
+		formatString: 0
+		lineageTag: 70aca250-8076-4599-9be4-537759bbeffb
+
+	measure 'Porcentaje Recuperación' = ```
+			
+			DIVIDE(
+			    [Carritos Completados],
+			    [Carritos Completados] + [Carritos Abandonados],
+			    0
+			)
+			
+			```
+		formatString: 0%;-0%;0%
+		lineageTag: 6afcfd3b-4508-4316-91e6-5ef23b42c24f
+
+	measure 'Carritos Abandonados por Categoría' = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fact_carrito[id_carrito]),
+			    fact_carrito[fue_completado] = 0
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 67217996-c365-4bc5-8882-05a61342f8b8
+
+	column id_carrito
+		dataType: int64
+		formatString: 0
+		lineageTag: 5af76a33-ce58-45cf-ad2e-5c10602d4952
+		summarizeBy: none
+		sourceColumn: id_carrito
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_cliente
+		dataType: int64
+		formatString: 0
+		lineageTag: 5b494d97-7881-4796-a345-ce58c5857502
+		summarizeBy: none
+		sourceColumn: id_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_fecha
+		dataType: int64
+		formatString: 0
+		lineageTag: d535c4f5-d651-4079-85e5-3e6ce22c737e
+		summarizeBy: none
+		sourceColumn: id_fecha
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_hora
+		dataType: int64
+		formatString: 0
+		lineageTag: f2275773-9415-44e7-b4b7-045a860544a0
+		summarizeBy: none
+		sourceColumn: id_hora
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_promocion
+		dataType: int64
+		formatString: 0
+		lineageTag: 4eb5500b-861d-48f4-ab34-f416ec693945
+		summarizeBy: none
+		sourceColumn: id_promocion
+
+		annotation SummarizationSetBy = Automatic
+
+	column dispositivo
+		dataType: string
+		lineageTag: bdd59d48-072c-4062-9a5c-3c9dae6a14f1
+		summarizeBy: none
+		sourceColumn: dispositivo
+
+		annotation SummarizationSetBy = Automatic
+
+	column fue_completado
+		dataType: int64
+		formatString: 0
+		lineageTag: e56dfe59-df3d-4065-8992-4b9c0af55c4b
+		summarizeBy: sum
+		sourceColumn: fue_completado
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_abandono
+		dataType: dateTime
+		formatString: dd/mmm/yyyy
+		lineageTag: a6318ee7-9bff-4c88-b719-9c4b246180bf
+		summarizeBy: none
+		sourceColumn: fecha_abandono
+
+		variation Variación
+			isDefault
+			relationship: f2640eb2-4c0c-440a-a6f7-d937ee0e3bef
+			defaultHierarchy: LocalDateTable_b5e9ca63-ef5d-4db9-980f-1bf1eaaf0fea.'Jerarquía de fechas'
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Estado = ```
+			
+			IF(fact_carrito[fue_completado] = 1, "Completado", "Abandonado")
+			
+			```
+		lineageTag: d50fe97f-70d9-47a3-a8c9-5ef5dbec8beb
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fecha Evento' = ```
+			
+			IF(
+			    fact_carrito[fue_completado] = 1,
+			    RELATED(dim_fecha[fecha]),
+			    fact_carrito[fecha_abandono]
+			)
+			
+			```
+		formatString: dd/mmm/yyyy
+		lineageTag: 21d0b794-c78f-4ce7-9d8f-9004807d7f73
+		summarizeBy: none
+
+		variation Variación
+			isDefault
+			relationship: 72d9763a-1b3f-4698-a8fe-9ac7575c4d47
+			defaultHierarchy: LocalDateTable_98767a48-5e81-4917-b35b-09a04e7e3f84.'Jerarquía de fechas'
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	partition fact_carrito = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost", "ProyectoBi"),
+				    dbo_fact_carrito = Origen{[Schema="dbo",Item="fact_carrito"]}[Data],
+				    #"Tipo cambiado" = Table.TransformColumnTypes(dbo_fact_carrito,{{"fue_completado", Int64.Type}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegación
+
