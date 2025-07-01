@@ -1,0 +1,55 @@
+table dim_ubicacion
+	lineageTag: 358ae7bc-5236-4adc-9f2e-9c4032ea6cf1
+
+	column id_ubicacion
+		dataType: int64
+		formatString: 0
+		lineageTag: fd63ccc3-c8f3-43e2-9dea-b5df2425d14e
+		summarizeBy: none
+		sourceColumn: id_ubicacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column departamento
+		dataType: string
+		lineageTag: bbbd0b3f-7079-42eb-8ada-d8c1e54b67df
+		summarizeBy: none
+		sourceColumn: departamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column municipio
+		dataType: string
+		lineageTag: c44a3784-3fd6-4f9c-a436-c17bd849b0d0
+		summarizeBy: none
+		sourceColumn: municipio
+
+		annotation SummarizationSetBy = Automatic
+
+	column direccion
+		dataType: string
+		lineageTag: 24f185f4-3b24-4fe9-8cd2-1a29032c6f2b
+		summarizeBy: none
+		sourceColumn: direccion
+
+		annotation SummarizationSetBy = Automatic
+
+	column referencia
+		dataType: string
+		lineageTag: 77af3dec-196f-4df2-9bac-655f6d55d0bb
+		summarizeBy: none
+		sourceColumn: referencia
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_ubicacion = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("127.0.0.1", "code_runners"),
+				    dbo_dim_ubicacion = Source{[Schema="dbo",Item="dim_ubicacion"]}[Data]
+				in
+				    dbo_dim_ubicacion
+
+	annotation PBI_ResultType = Table
+

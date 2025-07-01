@@ -1,0 +1,71 @@
+table dim_cliente
+	lineageTag: ee0f6ee0-21fc-40e8-a5a8-cd1cb1d00e3a
+
+	column id_cliente
+		dataType: int64
+		formatString: 0
+		lineageTag: 577184a5-d12b-41f8-b184-e79a3a7dd9a7
+		summarizeBy: none
+		sourceColumn: id_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column nombres
+		dataType: string
+		lineageTag: bb1bf175-4540-4a34-a481-e6fa1991db54
+		summarizeBy: none
+		sourceColumn: nombres
+
+		annotation SummarizationSetBy = Automatic
+
+	column apellidos
+		dataType: string
+		lineageTag: 85c8a821-dcc8-4605-81e9-138a93a48abb
+		summarizeBy: none
+		sourceColumn: apellidos
+
+		annotation SummarizationSetBy = Automatic
+
+	column correo
+		dataType: string
+		lineageTag: b2c16f85-0e56-4ba1-9bc5-be791b0f42b2
+		summarizeBy: none
+		sourceColumn: correo
+
+		annotation SummarizationSetBy = Automatic
+
+	column dui
+		dataType: string
+		lineageTag: 19dfc604-807f-4b65-a9e3-4ce7b40b03ee
+		summarizeBy: none
+		sourceColumn: dui
+
+		annotation SummarizationSetBy = Automatic
+
+	column nit
+		dataType: string
+		lineageTag: e1cae1b2-f912-4476-bdfb-5475881e8116
+		summarizeBy: none
+		sourceColumn: nit
+
+		annotation SummarizationSetBy = Automatic
+
+	column giro
+		dataType: string
+		lineageTag: 394273a1-9c0b-4432-bba9-133a51685c68
+		summarizeBy: none
+		sourceColumn: giro
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_cliente = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("127.0.0.1", "code_runners"),
+				    dbo_dim_cliente = Source{[Schema="dbo",Item="dim_cliente"]}[Data]
+				in
+				    dbo_dim_cliente
+
+	annotation PBI_ResultType = Table
+

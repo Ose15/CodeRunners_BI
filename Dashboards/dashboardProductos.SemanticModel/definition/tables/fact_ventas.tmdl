@@ -1,0 +1,180 @@
+table fact_ventas
+	lineageTag: c80197b5-2ca8-4b63-80da-3ffd40cd61e2
+
+	measure CorrMonto = corr_detalle + monto
+		lineageTag: ab96bd1a-9299-4a94-88c2-f141c988fefc
+
+	measure monto_venta = COALESCE(SUM(fact_ventas[monto]), 0)
+		lineageTag: 6bf8bbc7-47a1-4d05-9e8c-ae24d94f555f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Most Profitable Product ID'
+		lineageTag: e26445a5-3c20-4088-8bf6-a96ab7bae27f
+
+	measure 'Top Product Sales' =
+			
+			VAR TopProduct =
+			    CALCULATE(
+			        MAX(dim_producto[descripcion]),
+			        TopProductTable
+			    )
+			RETURN
+			    CALCULATE(
+			        SUM(fact_ventas[monto]),
+			        dim_producto[descripcion] = TopProduct
+			    )
+		lineageTag: 2cec107e-9f9f-4bd9-bee0-5f2cc977993d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column id_venta
+		dataType: int64
+		formatString: 0
+		lineageTag: 55f7f247-198f-4258-a02d-0e2830769bf9
+		summarizeBy: sum
+		sourceColumn: id_venta
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_orden
+		dataType: int64
+		formatString: 0
+		lineageTag: d8ca6693-e2e4-4a54-b0d6-35be9950ade2
+		summarizeBy: sum
+		sourceColumn: num_orden
+
+		annotation SummarizationSetBy = Automatic
+
+	column corr_detalle
+		dataType: int64
+		formatString: 0
+		lineageTag: 1df19c04-3c0b-4125-b945-e5ba4c334346
+		summarizeBy: sum
+		sourceColumn: corr_detalle
+
+		annotation SummarizationSetBy = Automatic
+
+	column cantidad
+		dataType: double
+		lineageTag: b064b85b-8c41-47c6-8348-aa974e454a45
+		summarizeBy: sum
+		sourceColumn: cantidad
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column monto
+		dataType: double
+		lineageTag: c924c4be-8c6d-4b94-a1ca-dd6e91431561
+		summarizeBy: sum
+		sourceColumn: monto
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column monto_descuento
+		dataType: double
+		lineageTag: 281b7b55-5611-4543-9b0e-3e9fd4c6b168
+		summarizeBy: sum
+		sourceColumn: monto_descuento
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column monto_impuesto
+		dataType: double
+		lineageTag: ef1ef551-7a80-4ba4-9698-648bea408aec
+		summarizeBy: sum
+		sourceColumn: monto_impuesto
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column monto_envio
+		dataType: double
+		lineageTag: 2063d114-97b9-45b5-9f8e-178f36ad46c8
+		summarizeBy: sum
+		sourceColumn: monto_envio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column id_fecha
+		dataType: int64
+		formatString: 0
+		lineageTag: 9796184e-a0f3-45c9-a8c0-f509744b59f4
+		summarizeBy: none
+		sourceColumn: id_fecha
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_hora
+		dataType: int64
+		formatString: 0
+		lineageTag: aa2187f5-c4fd-46e9-9311-dd03ffc633a8
+		summarizeBy: none
+		sourceColumn: id_hora
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_cliente
+		dataType: int64
+		formatString: 0
+		lineageTag: 294972a0-c223-444f-8daf-ba32fa6f3b1c
+		summarizeBy: none
+		sourceColumn: id_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column codigo_producto
+		dataType: string
+		lineageTag: 4c2d0845-db11-4f63-aa78-1147b20e32f7
+		summarizeBy: none
+		sourceColumn: codigo_producto
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_ubicacion
+		dataType: int64
+		formatString: 0
+		lineageTag: 142e06b0-7160-4419-a503-53f2b637923d
+		summarizeBy: none
+		sourceColumn: id_ubicacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_promocion
+		dataType: int64
+		formatString: 0
+		lineageTag: 7253349a-12f5-4632-9154-00cbd03a7747
+		summarizeBy: none
+		sourceColumn: id_promocion
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_pago
+		dataType: int64
+		formatString: 0
+		lineageTag: a9ea611f-9ee1-4b69-80a7-e4b75f7879b2
+		summarizeBy: none
+		sourceColumn: id_pago
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_ventas = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("127.0.0.1", "code_runners"),
+				    dbo_fact_ventas = Source{[Schema="dbo",Item="fact_ventas"]}[Data]
+				in
+				    dbo_fact_ventas
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,46 @@
+table TopProductTable
+	lineageTag: 043e445f-dbec-43e4-b1aa-cfcc0b572fd7
+
+	measure TopProductID =
+			
+			CALCULATE(
+			    MAX(dim_producto[codigo_producto]),
+			    TopProductTable
+			)
+		lineageTag: 84133320-e73d-4879-9137-35b7cb4bd72c
+
+	column TotalSales
+		lineageTag: fa1e0b17-4d61-4421-8632-cad2bb79049f
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [TotalSales]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column descripcion
+		lineageTag: 091caec9-4ad2-49a5-9fd2-2ef294a847e7
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: dim_producto[descripcion]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition TopProductTable = calculated
+		mode: import
+		source =
+				
+				TOPN(
+				    1,
+				    SUMMARIZE(
+				        fact_ventas,
+				        dim_producto[descripcion],
+				        "TotalSales", CALCULATE(SUM(fact_ventas[monto]))
+				    ),
+				    [TotalSales],
+				    DESC
+				)
+
+	annotation PBI_Id = 1e9cc89d9201416e83c739afbc3a1f6a
+

@@ -1,0 +1,105 @@
+{
+  "config": "{\"version\":\"5.59\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU10\",\"version\":\"5.65\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY24SU10",
+            "path": "BaseThemes/CY24SU10.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{\"relationships\":[{\"source\":\"ad8b8df5e71c8585da1b\",\"target\":\"d93338839ee798de0068\",\"type\":3},{\"source\":\"fa0a109e2853abcb841b\",\"target\":\"d93338839ee798de0068\",\"type\":3},{\"source\":\"e0f995ada556c9523606\",\"target\":\"d93338839ee798de0068\",\"type\":3},{\"source\":\"39fa8ef140d89aad460d\",\"target\":\"d93338839ee798de0068\",\"type\":3}],\"objects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#ECECEC'\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"82D\"}}}}}]}}",
+      "displayName": "Dashboard Productos",
+      "displayOption": 3,
+      "filters": "[]",
+      "height": 900.00,
+      "name": "c76868ffcac92810ee28",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"39fa8ef140d89aad460d\",\"layouts\":[{\"id\":0,\"position\":{\"x\":991.4285714285714,\"y\":0,\"z\":4000,\"width\":288.5714285714286,\"height\":64.28571428571429,\"tabOrder\":4000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"dim_fecha.fecha.Variation.Date Hierarchy.Year\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_fecha\",\"Type\":0}],\"Select\":[{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"PropertyVariationSource\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Name\":\"Variation\",\"Property\":\"fecha\"}},\"Hierarchy\":\"Date Hierarchy\"}},\"Level\":\"Year\"},\"Name\":\"dim_fecha.fecha.Variation.Date Hierarchy.Year\",\"NativeReferenceName\":\"fecha Year\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"PropertyVariationSource\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Name\":\"Variation\",\"Property\":\"fecha\"}},\"Hierarchy\":\"Date Hierarchy\"}},\"Level\":\"Year\"}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"general\":[{\"properties\":{}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"100D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 64.29,
+          "width": 288.57,
+          "x": 991.43,
+          "y": 0.00,
+          "z": 4000.00
+        },
+        {
+          "config": "{\"name\":\"3ac3db279ab43e12b230\",\"layouts\":[{\"id\":0,\"position\":{\"x\":50,\"y\":487.14285714285717,\"z\":6000,\"width\":355.7142857142857,\"height\":151.42857142857144,\"tabOrder\":6000}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Sum(fact_ventas.monto)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"fact_ventas\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"monto\"}},\"Function\":0},\"Name\":\"Sum(fact_ventas.monto)\",\"NativeReferenceName\":\"Monto total de ventas\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"monto\"}},\"Function\":0}}}]},\"columnProperties\":{\"Sum(fact_ventas.monto)\":{\"displayName\":\"Monto total de ventas\",\"formatString\":\"\\\\$#,0.###############;(\\\\$#,0.###############);\\\\$#,0.###############\"}},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"vcObjects\":{\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#DDDDDD'\"}}}}},\"radius\":{\"expr\":{\"Literal\":{\"Value\":\"10D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 151.43,
+          "width": 355.71,
+          "x": 50.00,
+          "y": 487.14,
+          "z": 6000.00
+        },
+        {
+          "config": "{\"name\":\"a9d2a480a8eb05e1d8b6\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"width\":100,\"height\":40,\"z\":1000,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"actionButton\",\"drillFilterOtherVisuals\":true,\"objects\":{\"icon\":[{\"properties\":{\"shapeType\":{\"expr\":{\"Literal\":{\"Value\":\"'back'\"}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'Back'\"}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "filters": "[]",
+          "height": 40.00,
+          "width": 100.00,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"ad8b8df5e71c8585da1b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":594.5822143554686,\"y\":105.47140702688924,\"z\":2000,\"width\":656.6666666666666,\"height\":336.6666666666667,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Rows\":[{\"queryRef\":\"dim_producto.descripcion\",\"active\":true}],\"Columns\":[{\"queryRef\":\"dim_fecha.fecha.Variation.Date Hierarchy.Month\",\"active\":true}],\"Values\":[{\"queryRef\":\"fact_ventas.monto_venta\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_producto\",\"Type\":0},{\"Name\":\"d1\",\"Entity\":\"dim_fecha\",\"Type\":0},{\"Name\":\"f\",\"Entity\":\"fact_ventas\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"descripcion\"},\"Name\":\"dim_producto.descripcion\",\"NativeReferenceName\":\"descripcion\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"PropertyVariationSource\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d1\"}},\"Name\":\"Variation\",\"Property\":\"fecha\"}},\"Hierarchy\":\"Date Hierarchy\"}},\"Level\":\"Month\"},\"Name\":\"dim_fecha.fecha.Variation.Date Hierarchy.Month\",\"NativeReferenceName\":\"First Date Hierarchy Month\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"monto_venta\"},\"Name\":\"fact_ventas.monto_venta\",\"NativeReferenceName\":\"monto_venta\"}]},\"columnProperties\":{\"Sum(fact_ventas.monto)\":{\"formatString\":null},\"fact_ventas.monto_venta\":{\"formatString\":\"\\\\$#,0.00;(\\\\$#,0.00);\\\\$#,0.00\"}},\"drillFilterOtherVisuals\":true,\"vcObjects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}}}}],\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#CCCCCC'\"}}}}},\"radius\":{\"expr\":{\"Literal\":{\"Value\":\"10D\"}}}}}],\"padding\":[{\"properties\":{\"left\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"top\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"right\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"bottom\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 336.67,
+          "width": 656.67,
+          "x": 594.58,
+          "y": 105.47,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"bce9a1b58a93b3175e81\",\"layouts\":[{\"id\":0,\"position\":{\"x\":50,\"y\":672.8571428571429,\"z\":7000,\"width\":355.7142857142857,\"height\":151.42857142857144,\"tabOrder\":7000}}],\"singleVisual\":{\"visualType\":\"card\",\"projections\":{\"Values\":[{\"queryRef\":\"Sum(fact_ventas.id_venta)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"fact_ventas\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"id_venta\"}},\"Function\":5},\"Name\":\"Sum(fact_ventas.id_venta)\",\"NativeReferenceName\":\"Ventas\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"id_venta\"}},\"Function\":5}}}]},\"columnProperties\":{\"Sum(fact_ventas.id_venta)\":{\"displayName\":\"Ventas\"}},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true,\"vcObjects\":{\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#DDDDDD'\"}}}}},\"radius\":{\"expr\":{\"Literal\":{\"Value\":\"10D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 151.43,
+          "width": 355.71,
+          "x": 50.00,
+          "y": 672.86,
+          "z": 7000.00
+        },
+        {
+          "config": "{\"name\":\"d93338839ee798de0068\",\"layouts\":[{\"id\":0,\"position\":{\"x\":415.7142857142857,\"y\":487.14285714285717,\"z\":3000,\"width\":835.7142857142858,\"height\":337.14285714285717,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"lineChart\",\"projections\":{\"Category\":[{\"queryRef\":\"dim_fecha.fecha.Variation.Date Hierarchy.Month\",\"active\":true}],\"Series\":[{\"queryRef\":\"dim_fecha.fecha.Variation.Date Hierarchy.Year\"}],\"Y\":[{\"queryRef\":\"fact_ventas.Top Product Sales\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_fecha\",\"Type\":0},{\"Name\":\"f\",\"Entity\":\"fact_ventas\",\"Type\":0}],\"Select\":[{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"PropertyVariationSource\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Name\":\"Variation\",\"Property\":\"fecha\"}},\"Hierarchy\":\"Date Hierarchy\"}},\"Level\":\"Month\"},\"Name\":\"dim_fecha.fecha.Variation.Date Hierarchy.Month\",\"NativeReferenceName\":\"fecha Month\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"PropertyVariationSource\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Name\":\"Variation\",\"Property\":\"fecha\"}},\"Hierarchy\":\"Date Hierarchy\"}},\"Level\":\"Year\"},\"Name\":\"dim_fecha.fecha.Variation.Date Hierarchy.Year\",\"NativeReferenceName\":\"fecha Year\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Top Product Sales\"},\"Name\":\"fact_ventas.Top Product Sales\",\"NativeReferenceName\":\"Top Product Sales\"}]},\"columnProperties\":{\"fact_ventas.monto_venta\":{\"formatString\":null}},\"drillFilterOtherVisuals\":true,\"objects\":{\"lineStyles\":[{\"properties\":{\"lineChartType\":{\"expr\":{\"Literal\":{\"Value\":\"'smooth'\"}}},\"interpolationSmooth\":{\"expr\":{\"Literal\":{\"Value\":\"'monotoneX'\"}}},\"showMarker\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"strokeTransparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"strokeShow\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"valueAxis\":[{\"properties\":{\"labelDisplayUnits\":{\"expr\":{\"Literal\":{\"Value\":\"1000D\"}}},\"start\":{\"expr\":{\"Literal\":{\"Value\":\"500D\"}}},\"end\":{\"expr\":{\"Literal\":{\"Value\":\"7000D\"}}},\"logAxisScale\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"showAxisTitle\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]},\"vcObjects\":{\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Producto más rentable'\"}}}}}],\"subTitle\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"text\":{\"expr\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"TopProductTable\"}},\"Property\":\"descripcion\"}},\"Function\":3}}},\"bold\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#DDDDDD'\"}}}}},\"radius\":{\"expr\":{\"Literal\":{\"Value\":\"10D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 337.14,
+          "width": 835.71,
+          "x": 415.71,
+          "y": 487.14,
+          "z": 3000.00
+        },
+        {
+          "config": "{\"name\":\"e0f995ada556c9523606\",\"layouts\":[{\"id\":0,\"position\":{\"x\":691.4285714285714,\"y\":0,\"z\":5000,\"width\":300,\"height\":64.28571428571429,\"tabOrder\":5000}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"dim_producto.categoria\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_producto\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"categoria\"},\"Name\":\"dim_producto.categoria\",\"NativeReferenceName\":\"Categoría\"}]},\"columnProperties\":{\"dim_producto.categoria\":{\"displayName\":\"Categoría\"}},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"selection\":[{\"properties\":{\"selectAllCheckboxEnabled\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"header\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}],\"general\":[{\"properties\":{}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"100D\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 64.29,
+          "width": 300.00,
+          "x": 691.43,
+          "y": 0.00,
+          "z": 5000.00
+        },
+        {
+          "config": "{\"name\":\"fa0a109e2853abcb841b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":49.36753767697493,\"y\":109.13012474287237,\"z\":0,\"width\":502.4661000632616,\"height\":336.8550760513794,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"barChart\",\"projections\":{\"Category\":[{\"queryRef\":\"dim_producto.descripcion\",\"active\":true}],\"Y\":[{\"queryRef\":\"Sum(fact_ventas.monto)\"}],\"Series\":[{\"queryRef\":\"dim_fecha.fecha.Variation.Date Hierarchy.Quarter\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_producto\",\"Type\":0},{\"Name\":\"f\",\"Entity\":\"fact_ventas\",\"Type\":0},{\"Name\":\"d1\",\"Entity\":\"dim_fecha\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"descripcion\"},\"Name\":\"dim_producto.descripcion\",\"NativeReferenceName\":\"descripcion\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"monto\"}},\"Function\":0},\"Name\":\"Sum(fact_ventas.monto)\",\"NativeReferenceName\":\"Sum of monto\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"PropertyVariationSource\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d1\"}},\"Name\":\"Variation\",\"Property\":\"fecha\"}},\"Hierarchy\":\"Date Hierarchy\"}},\"Level\":\"Quarter\"},\"Name\":\"dim_fecha.fecha.Variation.Date Hierarchy.Quarter\",\"NativeReferenceName\":\"fecha Quarter\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"monto\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"dataPoint\":[{\"properties\":{\"fill\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#EA96CC'\"}}}}}},\"selector\":{\"data\":[{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"LocalDateTable_1b0f6bff-83c3-4e83-a7d8-fea3c9d8cb72\"}},\"Property\":\"Quarter\"}},\"Right\":{\"Literal\":{\"Value\":\"'Qtr 1'\"}}}}}]}},{\"properties\":{\"fill\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#5CD488'\"}}}}}},\"selector\":{\"data\":[{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"LocalDateTable_1b0f6bff-83c3-4e83-a7d8-fea3c9d8cb72\"}},\"Property\":\"Quarter\"}},\"Right\":{\"Literal\":{\"Value\":\"'Qtr 2'\"}}}}}]}}],\"legend\":[{\"properties\":{\"position\":{\"expr\":{\"Literal\":{\"Value\":\"'TopCenter'\"}}},\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Corbel'\"}}},\"fontSize\":{\"expr\":{\"Literal\":{\"Value\":\"15D\"}}}}}],\"valueAxis\":[{\"properties\":{\"showAxisTitle\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"gridlineColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":1,\"Percent\":0.4}}}}},\"invertAxis\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"categoryAxis\":[{\"properties\":{\"showAxisTitle\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"fontFamily\":{\"expr\":{\"Literal\":{\"Value\":\"'Corbel'\"}}},\"switchAxisPosition\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"concatenateLabels\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"layout\":[{\"properties\":{\"stackedGapExplodes\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"seriesOrderReversed\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"seriesOrderSorted\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}}}}],\"border\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#DDDDDD'\"}}}}},\"radius\":{\"expr\":{\"Literal\":{\"Value\":\"10D\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Top 10 productos'\"}}},\"alignment\":{\"expr\":{\"Literal\":{\"Value\":\"'center'\"}}}}}]}}}",
+          "filters": "[{\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"dim_producto\"}},\"Property\":\"descripcion\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"subquery\",\"Expression\":{\"Subquery\":{\"Query\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"dim_producto\",\"Type\":0},{\"Name\":\"f\",\"Entity\":\"fact_ventas\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"descripcion\"},\"Name\":\"field\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"monto\"}},\"Function\":0}}}],\"Top\":10}}},\"Type\":2},{\"Name\":\"d\",\"Entity\":\"dim_producto\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"descripcion\"}}],\"Table\":{\"SourceRef\":{\"Source\":\"subquery\"}}}}}]},\"type\":\"TopN\",\"howCreated\":0,\"isHiddenInViewMode\":false}]",
+          "height": 336.86,
+          "width": 502.47,
+          "x": 49.37,
+          "y": 109.13,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ]
+}

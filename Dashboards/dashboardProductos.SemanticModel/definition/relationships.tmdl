@@ -1,0 +1,81 @@
+relationship 4ab1d120-bd8e-472e-b7b8-dc515842e07d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_fecha.fecha
+	toColumn: LocalDateTable_1b0f6bff-83c3-4e83-a7d8-fea3c9d8cb72.Date
+
+relationship 293d6c79-1d57-4f89-8bfc-95c3334103b2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_promocion.fecha_inicio
+	toColumn: LocalDateTable_b6a4dddd-d102-4ec4-8bdd-2f83a1ad134a.Date
+
+relationship cadfc571-fe1a-47f5-adf0-b2ed34e6f0c6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_promocion.fecha_fin
+	toColumn: LocalDateTable_51c14cc4-f0a6-4fae-ba5f-8a7974c95c6f.Date
+
+relationship 905b1de1-e993-464d-8c3c-0e2a41bee4ae
+	fromColumn: fact_movimientos_inventario.id_almacen
+	toColumn: dim_almacen.id_almacen
+
+	annotation PBI_IsFromSource = FS
+
+relationship 70dad3b4-d767-4b4f-976c-a3deed355c15
+	fromColumn: fact_movimientos_inventario.id_fecha
+	toColumn: dim_fecha.id_fecha
+
+	annotation PBI_IsFromSource = FS
+
+relationship 68e852b3-81df-40c4-90c7-48980911af64
+	fromColumn: fact_movimientos_inventario.id_hora
+	toColumn: dim_hora.id_hora
+
+	annotation PBI_IsFromSource = FS
+
+relationship 46724cba-93b4-47ef-b88a-6d7bf21ac4d1
+	fromColumn: fact_movimientos_inventario.codigo_producto
+	toColumn: dim_producto.codigo_producto
+
+	annotation PBI_IsFromSource = FS
+
+relationship ca38e24c-eece-4814-b48b-67ddc892013a
+	fromColumn: fact_ventas.id_cliente
+	toColumn: dim_cliente.id_cliente
+
+	annotation PBI_IsFromSource = FS
+
+relationship b438097f-3f89-438b-8954-383c6d477dc7
+	fromColumn: fact_ventas.id_fecha
+	toColumn: dim_fecha.id_fecha
+
+	annotation PBI_IsFromSource = FS
+
+relationship 39633155-9a63-4595-aa22-409bb613ab42
+	fromColumn: fact_ventas.id_hora
+	toColumn: dim_hora.id_hora
+
+	annotation PBI_IsFromSource = FS
+
+relationship d1d3a553-2d09-4137-b9aa-64228d603e7c
+	fromColumn: fact_ventas.id_pago
+	toColumn: dim_pago.id_pago
+
+	annotation PBI_IsFromSource = FS
+
+relationship cfbc5181-8c85-4f2c-a80f-bae78ce3b335
+	fromColumn: fact_ventas.codigo_producto
+	toColumn: dim_producto.codigo_producto
+
+	annotation PBI_IsFromSource = FS
+
+relationship f854efa2-a868-4bce-b0f9-f165a5ee4ef4
+	fromColumn: fact_ventas.id_promocion
+	toColumn: dim_promocion.id_promocion
+
+	annotation PBI_IsFromSource = FS
+
+relationship fd90fd4d-dca2-4439-88c7-cd15179defd5
+	fromColumn: fact_ventas.id_ubicacion
+	toColumn: dim_ubicacion.id_ubicacion
+
+	annotation PBI_IsFromSource = FS
+
