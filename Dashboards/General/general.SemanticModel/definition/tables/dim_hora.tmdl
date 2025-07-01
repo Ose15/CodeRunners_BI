@@ -1,0 +1,58 @@
+table dim_hora
+	lineageTag: 932e5bdd-cf42-41e1-96e2-7a4850de4f8f
+
+	column id_hora
+		dataType: int64
+		formatString: 0
+		lineageTag: 52a54dae-e451-4bb1-a285-96a3fc03cf75
+		summarizeBy: none
+		sourceColumn: id_hora
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column hora
+		dataType: int64
+		formatString: 0
+		lineageTag: fe1f34cd-e764-44e2-b071-08520e1adf7c
+		summarizeBy: sum
+		sourceColumn: hora
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column minuto
+		dataType: int64
+		formatString: 0
+		lineageTag: 0afe4d79-aecc-4b6f-af05-b60f26a222aa
+		summarizeBy: sum
+		sourceColumn: minuto
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column am
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3d4f4110-e307-4972-94e5-6df93cc49692
+		summarizeBy: none
+		sourceColumn: am
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_hora = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost", "ProyectoBi"),
+				    dbo_dim_hora = Origen{[Schema="dbo",Item="dim_hora"]}[Data]
+				in
+				    dbo_dim_hora
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,124 @@
+table dim_producto
+	lineageTag: 3be81024-40b9-496c-9c82-dcbfda801580
+
+	measure 'Producto Más Vendido' = ```
+			
+			VAR TopProducto =
+			    TOPN (
+			        1,
+			        SUMMARIZE (
+			            fact_ventas,
+			            dim_producto[subcategoria],
+			            "TotalVendidas", SUM ( fact_ventas[cantidad] )
+			        ),
+			        [TotalVendidas], DESC
+			    )
+			RETURN
+			    SELECTCOLUMNS ( TopProducto, "Producto", dim_producto[subcategoria] )
+			
+			```
+		lineageTag: 6dab0dc5-d141-4874-80c8-09faf2e2dfbd
+
+	column codigo_producto
+		dataType: string
+		lineageTag: 9b94cc16-bc93-4c26-9bf8-ad5ac88cd093
+		summarizeBy: none
+		sourceColumn: codigo_producto
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column descripcion
+		dataType: string
+		lineageTag: b9d95548-cc21-4e76-902d-7807e5b1f721
+		summarizeBy: none
+		sourceColumn: descripcion
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column marca
+		dataType: string
+		lineageTag: f74dac17-1603-467c-9b3c-bb90e44ac503
+		summarizeBy: none
+		sourceColumn: marca
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column categoria
+		dataType: string
+		lineageTag: 3a968171-52b8-452b-bb10-d417d385f0f1
+		summarizeBy: none
+		sourceColumn: categoria
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column subcategoria
+		dataType: string
+		lineageTag: 062519ee-bf45-41b8-9eef-9cf9a4aecd8a
+		summarizeBy: none
+		sourceColumn: subcategoria
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column unidad
+		dataType: string
+		lineageTag: 06e3ac48-b66a-4630-b13c-cbe19326aa32
+		summarizeBy: none
+		sourceColumn: unidad
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column peso_lb
+		dataType: double
+		lineageTag: c3b8b01f-58d9-423c-87f2-92621656e2b1
+		summarizeBy: sum
+		sourceColumn: peso_lb
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column color
+		dataType: string
+		lineageTag: 770712df-af03-4966-b5fe-fba37e828bdd
+		summarizeBy: none
+		sourceColumn: color
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column tamanio
+		dataType: string
+		lineageTag: 8598d5d4-b5e8-4d0e-9482-27b70c81df00
+		summarizeBy: none
+		sourceColumn: tamanio
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_producto = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost", "ProyectoBi"),
+				    dbo_dim_producto = Origen{[Schema="dbo",Item="dim_producto"]}[Data]
+				in
+				    dbo_dim_producto
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,108 @@
+table dim_cliente
+	lineageTag: 1932304e-a9d7-46a4-bc48-0581cef5847c
+
+	column id_cliente
+		dataType: int64
+		formatString: 0
+		lineageTag: 02c029c5-c4af-4a25-b6cd-00bf5719e9da
+		summarizeBy: none
+		sourceColumn: id_cliente
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nombres
+		dataType: string
+		lineageTag: a811d172-3a0c-4da9-96d0-d468e615a8f7
+		summarizeBy: none
+		sourceColumn: nombres
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column apellidos
+		dataType: string
+		lineageTag: ba9bfee1-5d1b-4966-8015-36577570c7d6
+		summarizeBy: none
+		sourceColumn: apellidos
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column correo
+		dataType: string
+		lineageTag: 43a4dffb-7f3f-4f14-92d5-b29b2857440e
+		summarizeBy: none
+		sourceColumn: correo
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dui
+		dataType: string
+		lineageTag: 273bef54-49bc-4ca1-ae21-237fee4a9666
+		summarizeBy: none
+		sourceColumn: dui
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nit
+		dataType: string
+		lineageTag: 2b31afad-bdd1-48dc-af2a-190b4dd6b09a
+		summarizeBy: none
+		sourceColumn: nit
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column giro
+		dataType: string
+		lineageTag: 2b2e1f66-7a09-441e-82b6-14a419d24305
+		summarizeBy: none
+		sourceColumn: giro
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tipo Cliente' = ```
+			
+			VAR FechaPrimera =
+			    CALCULATE(
+			        MIN(dim_fecha[fecha]),
+			        FILTER(fact_ventas, fact_ventas[id_cliente] = dim_cliente[id_cliente])
+			    )
+			VAR FechaMin = CALCULATE(MIN(dim_fecha[fecha]), ALL(dim_fecha))
+			VAR FechaMax = CALCULATE(MAX(dim_fecha[fecha]), ALL(dim_fecha))
+			RETURN
+			    IF(
+			        FechaPrimera >= FechaMin &&
+			        FechaPrimera <= FechaMax,
+			        "Nuevo",
+			        "Recurrente"
+			    )
+			
+			```
+		lineageTag: 3dd24af9-387a-4386-9d35-685ae3eaa7c8
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_cliente = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost", "ProyectoBi"),
+				    dbo_dim_cliente = Origen{[Schema="dbo",Item="dim_cliente"]}[Data]
+				in
+				    dbo_dim_cliente
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,109 @@
+table fact_carrito
+	lineageTag: cee1acf6-29a5-4e4c-b6ff-c301a034e9d7
+
+	column id_carrito
+		dataType: int64
+		formatString: 0
+		lineageTag: 55f4d478-8c73-4bfa-bd61-da873467a0c9
+		summarizeBy: none
+		sourceColumn: id_carrito
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_cliente
+		dataType: int64
+		formatString: 0
+		lineageTag: 0c8b0581-54d8-4df8-919c-667af5ddb312
+		summarizeBy: none
+		sourceColumn: id_cliente
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_fecha
+		dataType: int64
+		formatString: 0
+		lineageTag: 1cc8ed53-a600-4350-b57e-179581cf998e
+		summarizeBy: none
+		sourceColumn: id_fecha
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_hora
+		dataType: int64
+		formatString: 0
+		lineageTag: 08aaff0d-ef0c-41a2-b993-4b8d462b2cd2
+		summarizeBy: none
+		sourceColumn: id_hora
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_promocion
+		dataType: int64
+		formatString: 0
+		lineageTag: a0ec36d8-3461-4761-9dea-f5d0206a50e3
+		summarizeBy: none
+		sourceColumn: id_promocion
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dispositivo
+		dataType: string
+		lineageTag: 66821192-690d-478a-8e28-1681c086cadd
+		summarizeBy: none
+		sourceColumn: dispositivo
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column fue_completado
+		dataType: int64
+		formatString: 0
+		lineageTag: e716399e-6ef8-4814-bb11-1c594aa82e2d
+		summarizeBy: sum
+		sourceColumn: fue_completado
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_abandono
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b076c86d-b1bf-4f6a-8de5-dca1e3d7a783
+		summarizeBy: none
+		sourceColumn: fecha_abandono
+
+		variation Variación
+			isDefault
+			relationship: 93c17f39-3118-4b23-b14e-b9624338fa23
+			defaultHierarchy: LocalDateTable_86d78b3e-99f6-4806-954a-e82214a8a711.'Jerarquía de fechas'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_carrito = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost", "ProyectoBi"),
+				    dbo_fact_carrito = Origen{[Schema="dbo",Item="fact_carrito"]}[Data],
+				    #"Tipo cambiado" = Table.TransformColumnTypes(dbo_fact_carrito,{{"fue_completado", Int64.Type}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

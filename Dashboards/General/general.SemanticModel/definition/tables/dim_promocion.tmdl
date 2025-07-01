@@ -1,0 +1,93 @@
+table dim_promocion
+	lineageTag: 5961a5a3-34c3-4956-a418-76617a5565d8
+
+	column id_promocion
+		dataType: int64
+		formatString: 0
+		lineageTag: c1619ac9-d0c4-4330-abd8-40d74d122d9a
+		summarizeBy: none
+		sourceColumn: id_promocion
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column nommbre
+		dataType: string
+		lineageTag: 3b1c029d-10b1-4cea-91b1-ec0308042e7f
+		summarizeBy: none
+		sourceColumn: nommbre
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo
+		dataType: string
+		lineageTag: e31338d6-f9d1-4bdf-b076-7d173426d4be
+		summarizeBy: none
+		sourceColumn: tipo
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column presupuesto
+		dataType: double
+		lineageTag: 2d7bbde2-0c34-4bf6-a90b-66ac833321ff
+		summarizeBy: sum
+		sourceColumn: presupuesto
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fecha_inicio
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2676d1c9-530d-47fd-b4c0-4e35f3449d2f
+		summarizeBy: none
+		sourceColumn: fecha_inicio
+
+		variation Variación
+			isDefault
+			relationship: 220e6e7a-6f7b-483d-9dce-c07408fd4fcb
+			defaultHierarchy: LocalDateTable_323b8146-4f4b-4689-b54b-e4ad74ba0e7a.'Jerarquía de fechas'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column fecha_fin
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2db2b599-716a-49d0-8209-c545fdedc5de
+		summarizeBy: none
+		sourceColumn: fecha_fin
+
+		variation Variación
+			isDefault
+			relationship: cdb11fff-472d-4129-bb19-2b6f12d60237
+			defaultHierarchy: LocalDateTable_340a557a-dc1f-4c0b-af8a-9fc3d61ad99f.'Jerarquía de fechas'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition dim_promocion = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost", "ProyectoBi"),
+				    dbo_dim_promocion = Origen{[Schema="dbo",Item="dim_promocion"]}[Data]
+				in
+				    dbo_dim_promocion
+
+	annotation PBI_ResultType = Table
+

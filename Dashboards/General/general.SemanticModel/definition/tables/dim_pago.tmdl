@@ -1,0 +1,75 @@
+table dim_pago
+	lineageTag: 279f0d27-fe22-4a59-8dff-c7b58b792344
+
+	column id_pago
+		dataType: int64
+		formatString: 0
+		lineageTag: 1d2a9eda-4368-4a58-8bc5-be86917e65c0
+		summarizeBy: none
+		sourceColumn: id_pago
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column metodo
+		dataType: string
+		lineageTag: 15d45c07-4699-414c-896c-46081915fbaa
+		summarizeBy: none
+		sourceColumn: metodo
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column banco_dest
+		dataType: string
+		lineageTag: fcfd64d6-0e2d-41d1-9fd4-6e0cd8c4aa44
+		summarizeBy: none
+		sourceColumn: banco_dest
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_cuenta
+		dataType: string
+		lineageTag: d2625842-f028-43a5-b500-495b81cd3840
+		summarizeBy: none
+		sourceColumn: num_cuenta
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column concepto
+		dataType: string
+		lineageTag: 07ed5109-eb84-42da-88bd-141a028ed6ad
+		summarizeBy: none
+		sourceColumn: concepto
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column titular
+		dataType: string
+		lineageTag: b102b266-4b14-4e37-ae27-ce2fd77b3671
+		summarizeBy: none
+		sourceColumn: titular
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_pago = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost", "ProyectoBi"),
+				    dbo_dim_pago = Origen{[Schema="dbo",Item="dim_pago"]}[Data]
+				in
+				    dbo_dim_pago
+
+	annotation PBI_ResultType = Table
+
