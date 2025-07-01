@@ -1,6 +1,32 @@
 table dim_producto
 	lineageTag: 8536506b-e2f8-4a70-8e9e-c36fd117450e
 
+	measure 'Categoria Más Vendida' =
+			
+			VAR TopProduct =
+			    TOPN(
+			        1,
+			        SUMMARIZE(
+			            fact_ventas,
+			            dim_producto[categoria],
+			            "TotalMonto", SUM(fact_ventas[monto])
+			        ),
+			        [TotalMonto], DESC
+			    )
+			RETURN
+			    MAXX(TopProduct, dim_producto[categoria])
+		lineageTag: 71fed608-b7e8-401a-90e9-7ebe65a89463
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "MaxPerCategory"
+				}
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isText":true}
+
 	column codigo_producto
 		dataType: string
 		lineageTag: ce744504-d021-4201-8b58-895523275630

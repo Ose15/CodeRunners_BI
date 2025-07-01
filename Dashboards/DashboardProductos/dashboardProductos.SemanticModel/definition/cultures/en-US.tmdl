@@ -3213,6 +3213,16 @@ cultureInfo en-US
 			            "State": "Generated",
 			            "Weight": 0.99
 			          }
+			        },
+			        {
+			          "Ventas totales": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
 			        }
 			      ]
 			    },
@@ -3853,42 +3863,25 @@ cultureInfo en-US
 			          }
 			        }
 			      ]
+			    },
+			    "dim_producto.categoria_más_vendida": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_producto",
+			          "ConceptualProperty": "Categoria Más Vendida"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "categoria más vendida": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {
-			    "dim_promocion_fecha_fin_date_hierarchy_has_dim_promocion_fecha_fin_day": {
-			      "Binding": {
-			        "ConceptualEntity": "dim_promocion"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "dim_promocion.fecha_fin.date_hierarchy": {
-			          "Target": {
-			            "Entity": "dim_promocion.fecha_fin.date_hierarchy"
-			          }
-			        },
-			        "dim_promocion.fecha_fin.day": {
-			          "Target": {
-			            "Entity": "dim_promocion.fecha_fin.day"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "dim_promocion.fecha_fin.date_hierarchy"
-			            },
-			            "Object": {
-			              "Role": "dim_promocion.fecha_fin.day"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "fecha_fin_date_hierarchies_have_fecha_fin_days"
-			        }
-			      ]
-			    },
 			    "dim_promocion_fecha_fin_date_hierarchy_has_dim_promocion_fecha_fin_month": {
 			      "Binding": {
 			        "ConceptualEntity": "dim_promocion"
@@ -4854,6 +4847,39 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "dim_almacens_have_fact_movimientos_inventarios"
+			        }
+			      ]
+			    },
+			    "dim_producto_has_categoria_más_vendida": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_producto"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_producto": {
+			          "Target": {
+			            "Entity": "dim_producto"
+			          }
+			        },
+			        "dim_producto.categoria_más_vendida": {
+			          "Target": {
+			            "Entity": "dim_producto.categoria_más_vendida"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_producto"
+			            },
+			            "Object": {
+			              "Role": "dim_producto.categoria_más_vendida"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "dim_productos_have_categoria_más_vendida"
 			        }
 			      ]
 			    },
@@ -7032,6 +7058,39 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "dim_almacens_have_id_almacens"
+			        }
+			      ]
+			    },
+			    "dim_promocion_fecha_fin_date_hierarchy_has_dim_promocion_fecha_fin_day": {
+			      "Binding": {
+			        "ConceptualEntity": "dim_promocion"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "dim_promocion.fecha_fin.date_hierarchy": {
+			          "Target": {
+			            "Entity": "dim_promocion.fecha_fin.date_hierarchy"
+			          }
+			        },
+			        "dim_promocion.fecha_fin.day": {
+			          "Target": {
+			            "Entity": "dim_promocion.fecha_fin.day"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "dim_promocion.fecha_fin.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "dim_promocion.fecha_fin.day"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "fecha_fin_date_hierarchies_have_fecha_fin_days"
 			        }
 			      ]
 			    }
