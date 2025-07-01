@@ -1,0 +1,51 @@
+table 'Ventas por canal'
+	lineageTag: bf61db42-bc08-420b-870a-4ed39f4e8507
+
+	column anio
+		dataType: int64
+		formatString: 0
+		lineageTag: da38a2bc-4741-4d3a-ac44-c494ae2b2c19
+		summarizeBy: sum
+		sourceColumn: anio
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes
+		dataType: int64
+		formatString: 0
+		lineageTag: a04587c6-3ef8-402c-92c4-33bcf5486eed
+		summarizeBy: sum
+		sourceColumn: mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column canal
+		dataType: string
+		lineageTag: c086dc55-e117-499b-b56d-d6e0107de7b3
+		summarizeBy: none
+		sourceColumn: canal
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_ventas
+		dataType: double
+		lineageTag: c7ea1435-05ab-4d47-9a72-f16b8b00384d
+		summarizeBy: sum
+		sourceColumn: total_ventas
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Ventas por canal' = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost,1433", "code_runners", [Query="SELECT #(lf)    df.anio,#(lf)    df.mes,#(lf)    dc.nombre AS canal,#(lf)    SUM(fv.monto) AS total_ventas#(lf)FROM fact_ventas fv#(lf)JOIN dim_fecha df ON fv.id_fecha = df.id_fecha#(lf)JOIN dim_canal dc ON fv.id_canal = dc.id_canal#(lf)GROUP BY df.anio, df.mes, dc.nombre#(lf)ORDER BY df.anio, df.mes;#(lf)"])
+				in
+				    Origen
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

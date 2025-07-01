@@ -1,0 +1,50 @@
+table dim_hora
+	lineageTag: df5353f8-f909-4d3c-a17e-3c49e27ec30e
+
+	column id_hora
+		dataType: int64
+		formatString: 0
+		lineageTag: 2139bdf1-bcd4-4757-8896-5bea809d45df
+		summarizeBy: none
+		sourceColumn: id_hora
+
+		annotation SummarizationSetBy = Automatic
+
+	column hora
+		dataType: int64
+		formatString: 0
+		lineageTag: 95fce92c-ba2e-4595-b817-9d8281bae22c
+		summarizeBy: sum
+		sourceColumn: hora
+
+		annotation SummarizationSetBy = Automatic
+
+	column minuto
+		dataType: int64
+		formatString: 0
+		lineageTag: 03be5005-a2f2-43f7-a18e-b3523f2dd7ab
+		summarizeBy: sum
+		sourceColumn: minuto
+
+		annotation SummarizationSetBy = Automatic
+
+	column am
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: dafa0287-0bd3-4738-b761-5c830c1f20de
+		summarizeBy: none
+		sourceColumn: am
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_hora = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost,1433", "code_runners"),
+				    dbo_dim_hora = Origen{[Schema="dbo",Item="dim_hora"]}[Data]
+				in
+				    dbo_dim_hora
+
+	annotation PBI_ResultType = Table
+

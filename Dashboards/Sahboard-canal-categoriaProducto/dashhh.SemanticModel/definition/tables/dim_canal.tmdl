@@ -1,0 +1,31 @@
+table dim_canal
+	lineageTag: 0ae5e33d-7e52-4949-8936-d7ee05c5b0c9
+
+	column id_canal
+		dataType: int64
+		formatString: 0
+		lineageTag: 647042b2-66f2-4faf-9fb4-5cc5188dbd8d
+		summarizeBy: none
+		sourceColumn: id_canal
+
+		annotation SummarizationSetBy = Automatic
+
+	column nombre
+		dataType: string
+		lineageTag: 62ab62ff-4af0-4d09-bb73-f14be72dcf36
+		summarizeBy: none
+		sourceColumn: nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_canal = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost,1433", "code_runners"),
+				    dbo_dim_canal = Origen{[Schema="dbo",Item="dim_canal"]}[Data]
+				in
+				    dbo_dim_canal
+
+	annotation PBI_ResultType = Table
+

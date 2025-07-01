@@ -1,0 +1,189 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 50,
+            "y": 107.70707974552863
+          },
+          "nodeIndex": "dim_almacen",
+          "nodeLineageTag": "8177fd5a-42a4-4593-9587-d7578af44296",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1240.9545750956459,
+            "y": 556.21470451289269
+          },
+          "nodeIndex": "dim_cliente",
+          "nodeLineageTag": "2970e1de-42dd-4b57-9888-4e2c896d2a87",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 654.52926820873017,
+            "y": 536.70677933463389
+          },
+          "nodeIndex": "dim_fecha",
+          "nodeLineageTag": "ae2c0387-3dba-4016-94a6-5407de042e61",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 626.74591657402846,
+            "y": 304.80855192278295
+          },
+          "nodeIndex": "dim_hora",
+          "nodeLineageTag": "df5353f8-f909-4d3c-a17e-3c49e27ec30e",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 948.14656666970711,
+            "y": 754.15412005180826
+          },
+          "nodeIndex": "dim_pago",
+          "nodeLineageTag": "e8815c1a-9957-470a-962b-e4d7d4f5b46d",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 639.599409285779,
+            "y": -50
+          },
+          "nodeIndex": "dim_producto",
+          "nodeLineageTag": "5ae93eee-fcaa-4bd9-8d38-dd866a0f7e63",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1114.1751784483281,
+            "y": 16.349970477843954
+          },
+          "nodeIndex": "dim_promocion",
+          "nodeLineageTag": "8a20efec-4219-48b4-b4c1-3c9811422668",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1344.7191505026949,
+            "y": 298.464507154735
+          },
+          "nodeIndex": "dim_ubicacion",
+          "nodeLineageTag": "7844a25e-9817-49cc-b1f3-5b5ec99ef098",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 334.26552592701347,
+            "y": 111.94362511997429
+          },
+          "nodeIndex": "fact_movimientos_inventario",
+          "nodeLineageTag": "058fedd5-9ab5-47ed-90eb-5b78f3ebf316",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 947.33802641877651,
+            "y": 293.39295692356052
+          },
+          "nodeIndex": "fact_ventas",
+          "nodeLineageTag": "6eddbdd0-7bf8-4498-8d64-0f93602d3f4d",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1578.7191505026949,
+            "y": 450.07706002590407
+          },
+          "nodeIndex": "dim_canal",
+          "nodeLineageTag": "0ae5e33d-7e52-4949-8936-d7ee05c5b0c9",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1812.7191505026949,
+            "y": 450.07706002590407
+          },
+          "nodeIndex": "ingreso_ttoal_canal",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2046.7191505026949,
+            "y": 426.07706002590407
+          },
+          "nodeIndex": "Ventas por canal",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas las tablas",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas las tablas",
+  "defaultDiagram": "Todas las tablas"
+}

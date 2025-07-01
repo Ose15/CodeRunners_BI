@@ -1,0 +1,87 @@
+relationship fb2b74fb-d4b1-4d5d-9c90-46b4ce1e1372
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_fecha.fecha
+	toColumn: LocalDateTable_49288ffe-b99d-475d-8384-36274a439645.Date
+
+relationship a1916d4c-cd68-4a49-ace7-bfd91fd7eecf
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_promocion.fecha_inicio
+	toColumn: LocalDateTable_34eaab1d-2c01-4f29-ace5-80d29ede734f.Date
+
+relationship ae5714b8-2687-42ad-9b36-ecb63bf19569
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_promocion.fecha_fin
+	toColumn: LocalDateTable_473ba0b6-bca6-46d4-b0a2-fd90ed1a3283.Date
+
+relationship 0336c087-046d-435f-92c6-0afbf82c8d8b
+	fromColumn: fact_movimientos_inventario.id_almacen
+	toColumn: dim_almacen.id_almacen
+
+	annotation PBI_IsFromSource = FS
+
+relationship 605516f2-1210-4ba6-b250-3715792623a5
+	fromColumn: fact_movimientos_inventario.id_fecha
+	toColumn: dim_fecha.id_fecha
+
+	annotation PBI_IsFromSource = FS
+
+relationship bd23706a-e494-4597-80b6-22835cab1242
+	fromColumn: fact_movimientos_inventario.id_hora
+	toColumn: dim_hora.id_hora
+
+	annotation PBI_IsFromSource = FS
+
+relationship b94ceaed-2b19-4448-984d-84a643e9aee1
+	fromColumn: fact_movimientos_inventario.codigo_producto
+	toColumn: dim_producto.codigo_producto
+
+	annotation PBI_IsFromSource = FS
+
+relationship 291e788e-bbda-450f-be7e-a7b1c6854451
+	fromColumn: fact_ventas.id_cliente
+	toColumn: dim_cliente.id_cliente
+
+	annotation PBI_IsFromSource = FS
+
+relationship 6c62f5d9-edf2-426b-bf7e-af51d3db4469
+	fromColumn: fact_ventas.id_fecha
+	toColumn: dim_fecha.id_fecha
+
+	annotation PBI_IsFromSource = FS
+
+relationship 5dd2da03-7af1-471d-a8d3-cd30a4eecd95
+	fromColumn: fact_ventas.id_hora
+	toColumn: dim_hora.id_hora
+
+	annotation PBI_IsFromSource = FS
+
+relationship 2e0bbe39-a268-467b-bdf1-ff354df5fc28
+	fromColumn: fact_ventas.codigo_producto
+	toColumn: dim_producto.codigo_producto
+
+	annotation PBI_IsFromSource = FS
+
+relationship 5f768ab1-558b-4c37-9af4-57eedc892a59
+	fromColumn: fact_ventas.id_pago
+	toColumn: dim_pago.id_pago
+
+	annotation PBI_IsFromSource = FS
+
+relationship 58a8a762-0993-4462-bb91-9878ed78d3e6
+	fromColumn: fact_ventas.id_promocion
+	toColumn: dim_promocion.id_promocion
+
+	annotation PBI_IsFromSource = FS
+
+relationship 4f0514a5-4d7b-4991-967d-5e904b3338fa
+	fromColumn: fact_ventas.id_ubicacion
+	toColumn: dim_ubicacion.id_ubicacion
+
+	annotation PBI_IsFromSource = FS
+
+relationship 978e5555-cfc4-49d1-97e6-3485d8e176a0
+	fromColumn: fact_ventas.id_canal
+	toColumn: dim_canal.id_canal
+
+	annotation PBI_IsFromSource = FS
+

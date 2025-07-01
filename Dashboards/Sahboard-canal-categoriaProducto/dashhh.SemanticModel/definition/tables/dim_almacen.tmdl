@@ -1,0 +1,55 @@
+table dim_almacen
+	lineageTag: 8177fd5a-42a4-4593-9587-d7578af44296
+
+	column id_almacen
+		dataType: int64
+		formatString: 0
+		lineageTag: 2c876201-db9a-442a-9554-09cd977dad1e
+		summarizeBy: none
+		sourceColumn: id_almacen
+
+		annotation SummarizationSetBy = Automatic
+
+	column nombre
+		dataType: string
+		lineageTag: 3ba1c206-56da-4238-b49c-3e64dd018cfd
+		summarizeBy: none
+		sourceColumn: nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column sucursal
+		dataType: string
+		lineageTag: 87e6105f-c1be-479b-8b3f-e3f52edb3493
+		summarizeBy: none
+		sourceColumn: sucursal
+
+		annotation SummarizationSetBy = Automatic
+
+	column departamento
+		dataType: string
+		lineageTag: f54d8f32-cfd1-464e-8a7d-d475f6a5cf5b
+		summarizeBy: none
+		sourceColumn: departamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column municipio
+		dataType: string
+		lineageTag: 7fb43b38-387d-4928-86d8-4502732ac293
+		summarizeBy: none
+		sourceColumn: municipio
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_almacen = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost,1433", "code_runners"),
+				    dbo_dim_almacen = Origen{[Schema="dbo",Item="dim_almacen"]}[Data]
+				in
+				    dbo_dim_almacen
+
+	annotation PBI_ResultType = Table
+

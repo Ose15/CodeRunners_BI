@@ -1,0 +1,88 @@
+table dim_producto
+	lineageTag: 5ae93eee-fcaa-4bd9-8d38-dd866a0f7e63
+
+	column codigo_producto
+		dataType: string
+		lineageTag: 8eb32b99-d1ec-41f7-a135-36c5a96a27ca
+		summarizeBy: none
+		sourceColumn: codigo_producto
+
+		annotation SummarizationSetBy = Automatic
+
+	column descripcion
+		dataType: string
+		lineageTag: e3ab1d61-3e68-4c10-8a08-dc7ecab5f89b
+		summarizeBy: none
+		sourceColumn: descripcion
+
+		annotation SummarizationSetBy = Automatic
+
+	column marca
+		dataType: string
+		lineageTag: 34894aa7-fb96-45fc-8571-91974f2ae3a7
+		summarizeBy: none
+		sourceColumn: marca
+
+		annotation SummarizationSetBy = Automatic
+
+	column categoria
+		dataType: string
+		lineageTag: fe9f6b82-2f46-4467-beb6-69764e797339
+		summarizeBy: none
+		sourceColumn: categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column subcategoria
+		dataType: string
+		lineageTag: 532eec85-8921-4c75-bc8c-e3ad95104e40
+		summarizeBy: none
+		sourceColumn: subcategoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column unidad
+		dataType: string
+		lineageTag: bd61d25b-51c9-4c6f-ae76-21c905feac70
+		summarizeBy: none
+		sourceColumn: unidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column peso_lb
+		dataType: double
+		lineageTag: 05ad61c2-3b67-42be-a6fd-fa0c6060c844
+		summarizeBy: sum
+		sourceColumn: peso_lb
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column color
+		dataType: string
+		lineageTag: a05d5d32-9306-428e-8cb5-12f810a754fe
+		summarizeBy: none
+		sourceColumn: color
+
+		annotation SummarizationSetBy = Automatic
+
+	column tamanio
+		dataType: string
+		lineageTag: 164c3485-f7ad-4d92-9117-2b508fbdf406
+		summarizeBy: none
+		sourceColumn: tamanio
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_producto = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost,1433", "code_runners"),
+				    dbo_dim_producto = Origen{[Schema="dbo",Item="dim_producto"]}[Data]
+				in
+				    dbo_dim_producto
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,36 @@
+model Model
+	culture: es-MX
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-SV
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["dim_almacen","dim_cliente","dim_fecha","dim_hora","dim_producto","dim_pago","dim_promocion","dim_ubicacion","fact_movimientos_inventario","fact_ventas","dim_canal","ingreso_ttoal_canal","Ventas por canal"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.144.1155.0 (25.06)+46435b07013d2a234d7fd007083a9e70b8e79f1c
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table dim_almacen
+ref table dim_cliente
+ref table dim_fecha
+ref table DateTableTemplate_4e898c00-e7e9-4b49-bc92-7e08840099d3
+ref table LocalDateTable_49288ffe-b99d-475d-8384-36274a439645
+ref table dim_hora
+ref table dim_producto
+ref table dim_pago
+ref table dim_promocion
+ref table LocalDateTable_34eaab1d-2c01-4f29-ace5-80d29ede734f
+ref table LocalDateTable_473ba0b6-bca6-46d4-b0a2-fd90ed1a3283
+ref table dim_ubicacion
+ref table fact_movimientos_inventario
+ref table fact_ventas
+ref table dim_canal
+ref table ingreso_ttoal_canal
+ref table 'Ventas por canal'
+
+ref cultureInfo es-MX
+

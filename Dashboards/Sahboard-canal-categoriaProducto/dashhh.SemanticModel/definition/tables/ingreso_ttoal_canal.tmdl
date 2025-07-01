@@ -1,0 +1,33 @@
+table ingreso_ttoal_canal
+	lineageTag: 1f5ea427-81f6-4b1b-92ea-d3545e4dd800
+
+	column canal
+		dataType: string
+		lineageTag: 021879c1-ae67-45fe-a379-ab479b267156
+		summarizeBy: none
+		sourceColumn: canal
+
+		annotation SummarizationSetBy = Automatic
+
+	column ingreso_total
+		dataType: double
+		lineageTag: e2bfb16f-3dbb-4f8d-9865-cb295a8708dd
+		summarizeBy: sum
+		sourceColumn: ingreso_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition ingreso_ttoal_canal = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost,1433", "code_runners", [Query="SELECT #(lf)    dc.nombre AS canal,#(lf)    SUM(fv.monto) AS ingreso_total#(lf)FROM fact_ventas fv#(lf)JOIN dim_canal dc ON fv.id_canal = dc.id_canal#(lf)GROUP BY dc.nombre;"])
+				in
+				    Origen
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+
