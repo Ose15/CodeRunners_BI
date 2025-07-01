@@ -1,0 +1,165 @@
+table fact_ventas
+	lineageTag: 33433725-4ce7-4b10-a530-c657a34d6d15
+
+	measure VentasTotales = SUM(fact_ventas[monto])
+		lineageTag: 9afe8b90-6198-4a34-8d51-ff24d5d85dcd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure VentasMensuales = SUM(fact_ventas[monto])
+		lineageTag: 90b48fb0-48fd-4c88-859f-d811ec731315
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column id_venta
+		dataType: int64
+		formatString: 0
+		lineageTag: e7635b29-47b9-410e-816f-113a59b68403
+		summarizeBy: sum
+		sourceColumn: id_venta
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_orden
+		dataType: int64
+		formatString: 0
+		lineageTag: 04b7bc5d-a76d-43b5-aa20-b29117ca9968
+		summarizeBy: sum
+		sourceColumn: num_orden
+
+		annotation SummarizationSetBy = Automatic
+
+	column corr_detalle
+		dataType: int64
+		formatString: 0
+		lineageTag: b96f43f0-2892-4909-99dd-240f520dfb66
+		summarizeBy: sum
+		sourceColumn: corr_detalle
+
+		annotation SummarizationSetBy = Automatic
+
+	column cantidad
+		dataType: double
+		lineageTag: 8f43f41b-608f-4fa9-98d3-5cd9638530fb
+		summarizeBy: sum
+		sourceColumn: cantidad
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column monto
+		dataType: double
+		lineageTag: c96aca13-f62f-4032-ab03-3400e93f93cd
+		summarizeBy: sum
+		sourceColumn: monto
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column monto_descuento
+		dataType: double
+		lineageTag: 94288c9f-53de-4a76-926a-7ca7523a18f9
+		summarizeBy: sum
+		sourceColumn: monto_descuento
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column monto_impuesto
+		dataType: double
+		lineageTag: a412d4c8-a82a-42e6-bcc5-36cb5d04ff03
+		summarizeBy: sum
+		sourceColumn: monto_impuesto
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column monto_envio
+		dataType: double
+		lineageTag: f7ae6ecc-b374-40be-ae89-af213a9a325a
+		summarizeBy: sum
+		sourceColumn: monto_envio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column id_fecha
+		dataType: int64
+		formatString: 0
+		lineageTag: c24a098e-d9bb-4d1a-8525-18bfa5cde380
+		summarizeBy: none
+		sourceColumn: id_fecha
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_hora
+		dataType: int64
+		formatString: 0
+		lineageTag: c29f21d5-7422-4b28-a01f-b6652360def4
+		summarizeBy: sum
+		sourceColumn: id_hora
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_cliente
+		dataType: int64
+		formatString: 0
+		lineageTag: 6baddade-4b13-4d08-ac30-d83258f4cc19
+		summarizeBy: sum
+		sourceColumn: id_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column codigo_producto
+		dataType: string
+		lineageTag: 45582eb8-043a-415a-888f-c6e8fd5a4eb0
+		summarizeBy: none
+		sourceColumn: codigo_producto
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_ubicacion
+		dataType: int64
+		formatString: 0
+		lineageTag: 6f0215dc-9d79-44a8-b4ac-12078c01f440
+		summarizeBy: none
+		sourceColumn: id_ubicacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_promocion
+		dataType: int64
+		formatString: 0
+		lineageTag: 4f382108-2397-4e28-bf86-2c2871f430d4
+		summarizeBy: sum
+		sourceColumn: id_promocion
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_pago
+		dataType: int64
+		formatString: 0
+		lineageTag: 778f771a-45a9-496b-ab11-687c6c09efff
+		summarizeBy: sum
+		sourceColumn: id_pago
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_ventas = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost", "code_runners"),
+				    dbo_fact_ventas = Origen{[Schema="dbo",Item="fact_ventas"]}[Data]
+				in
+				    dbo_fact_ventas
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

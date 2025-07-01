@@ -1,0 +1,24 @@
+model Model
+	culture: es-ES
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-SV
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["fact_ventas","dim_ubicacion","dim_fecha"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.144.1155.0 (25.06)+46435b07013d2a234d7fd007083a9e70b8e79f1c
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table fact_ventas
+ref table dim_ubicacion
+ref table dim_fecha
+ref table DateTableTemplate_b7d9a4b6-3820-4247-974b-0bc6542d712b
+ref table LocalDateTable_dddaa96c-5c55-425d-bedb-511e3c43fa64
+
+ref cultureInfo es-ES
+

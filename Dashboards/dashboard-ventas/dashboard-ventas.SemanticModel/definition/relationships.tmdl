@@ -1,0 +1,15 @@
+relationship 269b0bac-9b11-4bda-8c0b-6bae44584b9a
+	fromColumn: fact_ventas.id_ubicacion
+	toColumn: dim_ubicacion.id_ubicacion
+
+	annotation PBI_IsFromSource = FS
+
+relationship e55cd446-5617-4c52-b139-86c957762e39
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_fecha.fecha
+	toColumn: LocalDateTable_dddaa96c-5c55-425d-bedb-511e3c43fa64.Date
+
+relationship a26aeee5-ad19-ed95-729e-3a5784e49c5b
+	fromColumn: fact_ventas.id_fecha
+	toColumn: dim_fecha.id_fecha
+

@@ -1,0 +1,71 @@
+table dim_ubicacion
+	lineageTag: 1889f433-667d-4923-8410-91262d1dba8c
+
+	column id_ubicacion
+		dataType: int64
+		formatString: 0
+		lineageTag: d881ccfa-7b13-478b-91d6-aecc35757582
+		summarizeBy: none
+		sourceColumn: id_ubicacion
+
+		annotation SummarizationSetBy = Automatic
+
+	column departamento
+		dataType: string
+		lineageTag: 02709e8a-8229-4685-b165-999fbb1c27fe
+		summarizeBy: none
+		sourceColumn: departamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column municipio
+		dataType: string
+		lineageTag: 71c1644b-b800-42b0-b1ec-8f95be7e8f2e
+		summarizeBy: none
+		sourceColumn: municipio
+
+		annotation SummarizationSetBy = Automatic
+
+	column direccion
+		dataType: string
+		lineageTag: 65b83d06-755e-4fc1-b7ba-6decfc31248f
+		summarizeBy: none
+		sourceColumn: direccion
+
+		annotation SummarizationSetBy = Automatic
+
+	column referencia
+		dataType: string
+		lineageTag: d389232c-0a1b-491b-8cdc-579c863caf44
+		summarizeBy: none
+		sourceColumn: referencia
+
+		annotation SummarizationSetBy = Automatic
+
+	column pais = "España"
+		lineageTag: d17d79cc-269f-470c-92b1-d540a9feb522
+		summarizeBy: none
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column DireccionMunicipal = "España, " & dim_ubicacion[departamento] & ", " & dim_ubicacion[municipio]
+		lineageTag: e1d37373-6b15-4e83-a3ea-34ab58db529b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_ubicacion = m
+		mode: import
+		source =
+				let
+				    Origen = Sql.Database("localhost", "code_runners"),
+				    dbo_dim_ubicacion = Origen{[Schema="dbo",Item="dim_ubicacion"]}[Data]
+				in
+				    dbo_dim_ubicacion
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+
